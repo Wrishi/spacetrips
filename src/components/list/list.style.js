@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darkgrey, lightgrey, white } from '../../utilities/style.def';
+import { darkgrey, grey, lightgrey, white } from '../../utilities/style.def';
 import rocketIcon from "../../assets/icons/Rocket@2x.svg"
 
 const Wrapper = styled.div`
@@ -10,13 +10,13 @@ const Wrapper = styled.div`
     position: relative;
     
     .item {
-        box-shadow: 1px 2px 5px #666;
+        box-shadow: 1px 2px 5px ${grey};
         transition: 0.2s;
         margin-bottom: 30px;
         position: relative;
 
         &:hover {
-            box-shadow: 1px 5px 15px #666;
+            box-shadow: 1px 5px 15px ${grey};
         }
         header {
             padding: 20px;
@@ -39,18 +39,26 @@ const Wrapper = styled.div`
                 background-position: 0px 0px;
                 background-repeat: repeat-x;
                 background-size: cover;
-                /* animation: animatedBackground 10s linear infinite alternate; */
                 float: right;
             }
+        }
 
-            /* @keyframes animatedBackground {
-                from {
-                    background-position: 0 0;
+        &.focus {
+            box-shadow: 1px 5px 15px ${grey};
+            header {
+                .icon {
+                    animation: animateIcon 0.25s 12 cubic-bezier(0.075, 0.82, 0.165, 1) alternate;
                 }
-                to {
-                    background-position: 100% 0;
+
+                @keyframes animateIcon {
+                    from {
+                        transform: translate(-5px, 5px);
+                    }
+                    to {
+                        transform: translate(5px, -5px);
+                    }
                 }
-            } */
+            }
         }
         .details {
             padding: 20px;

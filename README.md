@@ -2,6 +2,31 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Checklist
+### Map Component
+- [ ] When the user navigates on the map it updates the visible Space centers on the map
+- [x] When the user clicks on a marker of the map, the list is scrolled to the selected element and the list item rocket icon bounces for 3s (see _"Interaction dependencies"_ below)
+- [ ] When the user clicks on a marker of the map, it shows a popup with the Space center details
+- [x] `<GeolocateControl />` must be implemented (related to [react-map-gl](https://visgl.github.io/react-map-gl/))
+- [x] `<NavigationControl />` must be implemented (related to [react-map-gl](https://visgl.github.io/react-map-gl/))
+
+### Searchbar Component
+- [ ] The `<SearchBar />` uses Algolia autocomplete in order to retrieve Space centers
+- [ ] When a Space center is selected it:
+  - [ ] centers the map to this selected Space center position
+  - [ ] scrolls the list to this selected Space center position
+
+### List Component
+- [ ] When the user hovers a card, it changes the color of the according Space center marker on the map
+
+### Expectations
+- [ ] At least one pertinent automated test has been written
+- [x] [Apollo (graphql)](https://www.apollographql.com/) is used
+- [x] [react-map-gl](https://visgl.github.io/react-map-gl/) is used
+- [ ] A geosearch functionality based on the actual map region is made using [Algolia](https://www.algolia.com/doc/)
+- [x] [styled-components](https://styled-components.com/) is used
+- [ ] A README.md file describing project setup (commands to run, environment variables, etc.) and tradeoffs you have made
+
 ## Available Scripts
 
 In the project directory, you can run:

@@ -18,19 +18,19 @@ const Item = (props) => {
     }, [data])
 
     useEffect(() => {
-        if (props.selectedSpaceCenter && props.selectedSpaceCenter.id === props.spaceCenter.id) {
-            console.log(itemRef.current)
-            itemRef.current.scrollIntoView({
-                block: "nearest",
-                inline: "center",
-                behavior: "smooth",
-                alignToTop: false
-            })
+        if (props.spaceCenter && props.selectedSpaceCenter && props.selectedSpaceCenter.id === props.spaceCenter.id) {
+            // itemRef.current.scrollIntoView({
+            //     block: "nearest",
+            //     inline: "center",
+            //     behavior: "smooth",
+            //     alignToTop: false
+            // })
+            itemRef.current.parentNode.scrollTop = itemRef.current.offsetTop - 20
         }
-    }, [props.selectedSpaceCenter])
+    }, [props.selectedSpaceCenter, props.spaceCenter])
 
     return (
-        <div className="item" ref={itemRef}>
+        <div className={`item ${props.spaceCenter && props.selectedSpaceCenter && props.selectedSpaceCenter.id === props.spaceCenter.id && "focus"}`} ref={itemRef}>
             <header>
                 <div className='title'>
                     <h4 className="center">{props.spaceCenter.name}</h4>

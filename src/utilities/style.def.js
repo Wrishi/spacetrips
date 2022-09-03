@@ -1,5 +1,6 @@
 export const yellow = "#ffcf00"
 export const darkgrey = "#333333"
+export const grey = "#666666"
 export const lightgrey = "#dddddd"
 export const white = "#ffffff"
 export const translucent = {

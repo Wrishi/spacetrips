@@ -6,6 +6,10 @@ import pointerIcon from '../../assets/icons/Pointer@2x.svg'
 import pointerIconSelected from '../../assets/icons/Pointer_selected@2x.svg'
 import { DEFAULT_MAPBOX_CONFIG } from '../../utilities/constants'
 
+// Problems:
+// 1) Pop up switch on marker change
+// 2) All marker appear at once
+
 const Map = (props) => {
   /* Shows pop up when selected */
   const handleSelectMarker = (e, spaceCenter) => {
@@ -14,8 +18,10 @@ const Map = (props) => {
   }
 
   /* Closes pop up */
-  const closePopUp = () => {
-    props.selectSpaceCenter(null)
+  const closePopUp = (e) => {
+    // if(e.target.options.latitude === props.selectedSpaceCenter.latitude 
+    //   && e.target.options.longitude === props.selectedSpaceCenter.longitude) 
+      props.selectSpaceCenter(null)
   }
 
   const mapViewChange = (e) => {
