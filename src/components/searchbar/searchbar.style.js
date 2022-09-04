@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darkgrey, lightgrey, white, yellow } from '../../utilities/style.def';
+import { darkgrey, grey, lightgrey, white, yellow } from '../../utilities/style.def';
 import arrowIcon from '../../assets/icons/Arrow.svg'
 
 const Wrapper = styled.div`
@@ -14,6 +14,7 @@ const Wrapper = styled.div`
     padding-left: 60px;
     
     & > div{ 
+        position: relative;
         &:last-child {
             height: 100%;
             
@@ -28,6 +29,43 @@ const Wrapper = styled.div`
                 border: none;
             }
         }
+
+        input {
+            background-color: transparent;
+            border: none;
+            font-size: 16px;
+            border-bottom: 1px solid ${grey};
+            outline: none;
+            color: ${white};
+        }
+        input:focus {
+            border-bottom: 1px solid ${white};
+        }
+
+        .react-autosuggest__suggestions-container, 
+        .react-autosuggest__suggestions-container--open {
+            position: absolute;
+            background-color: ${white};
+            color: ${darkgrey};
+            z-index: 1;
+
+            ul{
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                li {
+                    padding: 5px 10px;
+                    border-bottom: 1px solid ${lightgrey};
+ 
+                    &:hover,
+                    &.react-autosuggest__suggestion--highlighted {
+                        font-weight: bold;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
     }
 
     select {

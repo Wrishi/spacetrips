@@ -88,7 +88,8 @@ const Wrapper = styled.div`
     }
 
     .shame {
-        
+        position: relative;
+        z-index: 1;
     }
 }
 `

@@ -8,9 +8,17 @@ const List = (props) => {
     <Wrapper>
       <div className="list">
         {
-          props.spaceCenters && props.spaceCenters.length > 0 && props.spaceCenters.map((spaceCenter, index) => {
-            return <Item spaceCenter={spaceCenter} selectedSpaceCenter={props.selectedSpaceCenter} key={index} />
-          })
+          props.spaceCenters && props.spaceCenters.length > 0
+            ? props.spaceCenters.map((spaceCenter, index) => {
+              return <Item spaceCenter={spaceCenter}
+                selectedSpaceCenter={props.selectedSpaceCenter}
+                date={props.date}
+                time={props.time}
+                key={index}
+                hoverSpaceCenter={props.hoverSpaceCenter}
+                />
+            })
+            : <div>No space centers were found in viewport...</div>
         }
       </div>
     </Wrapper>

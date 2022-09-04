@@ -22,25 +22,25 @@ export const GET_SPACESTATIONS_FOR_PLANET = gql`
   }
 `
 
-// export const GET_SPACESTATIONS = gql`
-//   query getSpaceStations {
-//   spaceCenters {
-//     nodes {
-//       id,
-//       uid,
-//       name,
-//       description,
-//       latitude,
-//       longitude,
-//       planet {
-//         id,
-//         name,
-//         code
-//       }
-//     }
-//   }
-// }
-// `
+export const GET_SPACESTATIONS = gql`
+  query getSpaceStations($page: Int!, $pageSize: Int!) {
+    spaceCenters(page: $page, pageSize: $pageSize) {
+    nodes {
+      id,
+      uid,
+      name,
+      description,
+      latitude,
+      longitude,
+      planet {
+        id,
+        name,
+        code
+      }
+    }
+  }
+}
+`
 
 export const GET_FLIGHTS_FOR_SPACESTATIONS = gql`
   query getSpaceStations($from: ID!, $departureDay: GraphQLDate!) {

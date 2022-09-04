@@ -9,6 +9,7 @@ export const DEFAULT_MAPBOX_CONFIG = {
         height: 900 
     }
 }
+export const MAPBOX_MIN_ZOOM = 3
 
 export const PLANET = {
     earth: {
@@ -19,3 +20,6 @@ export const PLANET = {
 
 // Ideally to be derived from new date()
 export const TODAY = "2019-09-23" // new Date().toISOString().slice(0, 10)
+export const TIME_FORMAT = "HH:mm"
+export const DATE_FORMAT = "YYYY-MM-DD"
+export const FLIGHT_TIME_DIFF_RANGE = 120 /* In minutes */
