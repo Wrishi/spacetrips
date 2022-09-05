@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Checklist
 ### Map Component
 - [x] When the user navigates on the map it updates the visible Space centers on the map
-- [x] When the user clicks on a marker of the map, the list is scrolled to the selected element and the list item rocket icon bounces for 3s (see _"Interaction dependencies"_ below)
+- [x] When the user clicks on a marker of the map, the list is scrolled to the selected element and the list item rocket icon bounces for 3s
 - [x] When the user clicks on a marker of the map, it shows a popup with the Space center details
 - [x] `<GeolocateControl />` must be implemented (related to [react-map-gl](https://visgl.github.io/react-map-gl/))
 - [x] `<NavigationControl />` must be implemented (related to [react-map-gl](https://visgl.github.io/react-map-gl/))
@@ -28,7 +28,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - [ ] A README.md file describing project setup (commands to run, environment variables, etc.) and tradeoffs you have made
 
 ### Extra
-- [] Show list of flights
+- [ ] Show list of flights
 
 ## Available Scripts
 

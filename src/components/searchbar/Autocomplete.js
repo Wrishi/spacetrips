@@ -8,7 +8,7 @@ const Hits = (props) => {
 
   useEffect(() => {
     if (props.hits) setHits(!value ? [] : props.hits)
-  }, [props.hits])
+  }, [props.hits, value])
 
   return (
     <Autosuggest

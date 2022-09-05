@@ -4,6 +4,7 @@ import { GET_FLIGHTS_FOR_SPACESTATIONS } from '../../graplql/queries';
 import { FLIGHT_TIME_DIFF_RANGE, TODAY } from '../../utilities/constants';
 import Moment from 'react-moment';
 import moment from 'moment';
+import tzlookup from "tz-lookup"
 
 const Item = (props) => {
     const itemRef = useRef(null)
@@ -17,12 +18,22 @@ const Item = (props) => {
 
     useEffect(() => {
         if (!data) return
-        console.log()
         setFlights(data.flights.nodes.filter((flight) => {
-            const timeDiff = moment(`${props.date}T${props.time}:00.000Z`).diff(flight.departureAt, 'minutes')
+            /* Time difference calculated based on timezone */
+            const launchSiteTZ = tzlookup(props.spaceCenter.latitude, props.spaceCenter.longitude),
+                flightTime = moment.tz(flight.departureAt, launchSiteTZ),
+                tz = moment.tz.guess(),
+                currentTime = moment.tz(`${props.date}T${props.time}:00.000Z`, tz)
+            // console.log(launchSiteTZ)
+            // console.log(flightTime)
+            // console.log(tz)
+            // console.log(currentTime)
+            const timeDiff = currentTime.diff(flightTime, 'minutes')
+
+            // console.log(timeDiff);
             return timeDiff >= - FLIGHT_TIME_DIFF_RANGE && timeDiff <= FLIGHT_TIME_DIFF_RANGE
         }))
-    }, [data, props.date, props.time])
+    }, [data, props.date, props.time, props.spaceCenter])
 
     useEffect(() => {
         if (props.spaceCenter && props.selectedSpaceCenter && props.selectedSpaceCenter.id === props.spaceCenter.id) {
@@ -52,7 +63,12 @@ const Item = (props) => {
             <div className='details'>
                 {loading && <div>Loading flights...</div>}
                 {error && <div>Unknown error occured...</div>}
-                {!loading && !error && flights && <p>{flights.length} Departure{flights.length > 1 && 's'} planned {props.date === TODAY ? "today" : <span>on <Moment format="ddd, D MMM YYYY">{props.date}</Moment></span>}</p>}
+                {!loading && !error && flights &&
+                    <p>
+                        {flights.length} Departure{flights.length > 1 && 's'} planned
+                        &nbsp;{props.date === TODAY ? "today" : <span>on <Moment format="ddd, D MMM YYYY">{props.date}</Moment></span>}
+                        &nbsp;at around {props.time}
+                    </p>}
             </div>
             <footer>
                 <button>SEE ALL FLIGHTS</button>

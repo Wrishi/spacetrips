@@ -11,7 +11,7 @@ import moment from 'moment'
 const App = () => {
   /* Active planet */
   const currentPlanet = PLANET.earth
-  const [date, setDate] = useState(TODAY)
+  const [date, setDate] = useState(TODAY) // useState(moment().format(DATE_FORMAT)) // Does not have data for recent times
   const [time, setTime] = useState(moment().format(TIME_FORMAT))
 
   const page = useRef(1)
