@@ -5,12 +5,13 @@ import { DEFAULT_MAPBOX_CONFIG, MAPBOX_MIN_ZOOM } from '../../utilities/constant
 import pointerIcon from '../../assets/icons/Pointer@2x.svg'
 import pointerIconSelected from '../../assets/icons/Pointer_selected@2x.svg'
 import 'mapbox-gl/dist/mapbox-gl.css'
+import { connectHits } from 'react-instantsearch-dom'
 
 // Problems:
 // 1) Pop up switch on marker change
 // 2) Shame html
 
-const Map = (props) => {
+const Map = connectHits((props) => {
   const mapRef = useRef(null)
   const [showPopUp, setShowPopUp] = useState(false)
 
@@ -63,7 +64,7 @@ const Map = (props) => {
           minZoom={MAPBOX_MIN_ZOOM} /* Too many space centers!! */
         >
           {
-            props.spaceCenters && props.spaceCenters.length > 0 && props.spaceCenters.map((spaceCenter, index) => {
+            props.hits && props.hits.length > 0 && props.hits.map((spaceCenter, index) => {
               return <Marker anchor="bottom" key={index}
                 latitude={spaceCenter._geoloc.lat}
                 longitude={spaceCenter._geoloc.lng}
@@ -106,6 +107,6 @@ const Map = (props) => {
       </div>
     </Wrapper>
   );
-}
+})
 
 export default Map;

@@ -1,15 +1,16 @@
 import React from 'react';
+import { connectHits } from 'react-instantsearch-dom';
 import Item from './Item';
 import Wrapper from './list.style';
 
-const List = (props) => {
+const List = connectHits((props) => {
 
   return (
     <Wrapper>
       <div className="list" id="list-1">
         {
-          props.spaceCenters && props.spaceCenters.length > 0
-            ? props.spaceCenters.map((spaceCenter, index) => {
+          props.hits && props.hits.length > 0
+            ? props.hits.map((spaceCenter, index) => {
               return <Item spaceCenter={spaceCenter}
                 selectedSpaceCenter={props.selectedSpaceCenter}
                 date={props.date}
@@ -23,6 +24,6 @@ const List = (props) => {
       </div>
     </Wrapper>
   );
-}
+})
 
 export default List;
