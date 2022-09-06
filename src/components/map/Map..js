@@ -14,11 +14,6 @@ const Map = (props) => {
   const mapRef = useRef(null)
   const [showPopUp, setShowPopUp] = useState(false)
 
-  useEffect(() => {
-    if (!props.spaceCenters) return
-    console.log(props.spaceCenters)
-  }, [props.spaceCenters])
-
   /* Fly to location if selected space center not in map */
   useEffect(() => {
     if (!props.selectedSpaceCenter) return
@@ -44,6 +39,7 @@ const Map = (props) => {
     props.selectSpaceCenter(null)
   }
 
+  /* Updates Map boundaries on view change */
   const mapViewChange = (e) => {
     props.setMapBoundaries(mapRef.current.getBounds())
   }

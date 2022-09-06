@@ -17,8 +17,6 @@ const Hits = (props) => {
       onSuggestionsFetchRequested={({ value }) => props.refine(value)}
       onSuggestionsClearRequested={() => setHits([])}
       getSuggestionValue={hit => { 
-        console.log(hits)
-        props.setSpaceCenters(hits)
         props.selectSpaceCenter(hit.uid)
         return hit.name
       }}

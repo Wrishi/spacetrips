@@ -18,6 +18,7 @@ const Flights = (props) => {
 
     useEffect(() => {
         if (!data) return
+        /* Flights filtered based on flight time */
         setFlights(data.flights.nodes.filter((flight) => {
             /* Time difference calculated based on timezone */
             const launchSiteTZ = tzlookup(props.spaceCenter._geoloc.lat, props.spaceCenter._geoloc.lng),
