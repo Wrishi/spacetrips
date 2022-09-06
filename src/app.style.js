@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { lightgrey, translucent, white } from './utilities/style.def';
+import { breakpoint, lightgrey, translucent, white } from './utilities/style.def';
 import markerCardBackground from './assets/images/space_center_bg.png'
 
 const Wrapper = styled.div`
@@ -37,6 +37,13 @@ const Wrapper = styled.div`
     .col-10 {width: 83.33%;}
     .col-11 {width: 91.66%;}
     .col-12 {width: 100%;}
+
+    @media only screen and (max-width: ${breakpoint}) {
+        [class*="col-"] {
+            float: none;
+            width: 100%;
+        }
+    }
 
     .marker-btn {
         background-color: transparent;

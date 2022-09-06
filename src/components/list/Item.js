@@ -31,6 +31,7 @@ const Item = ({
         if (spaceCenter && selectedSpaceCenter && selectedSpaceCenter.uid === spaceCenter.uid) {
             // itemRef.current.scrollIntoView({ block: "nearest", inline: "center",  behavior: "smooth", alignToTop: false // })
             itemRef.current.parentNode.scrollTop = itemRef.current.offsetTop - 20
+            itemRef.current.parentNode.scrollLeft = itemRef.current.offsetLeft - 20
         }
     }, [selectedSpaceCenter, spaceCenter])
 

@@ -7,3 +7,5 @@ export const translucent = {
     red: "255,0,0,0.6",
     yellow: "255,207,0,0.6"
 }
+
+export const breakpoint = "950px"

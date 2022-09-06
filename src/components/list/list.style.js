@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { darkgrey, grey, lightgrey, white } from '../../utilities/style.def';
+import { breakpoint, darkgrey, grey, lightgrey, white } from '../../utilities/style.def';
 import rocketIcon from "../../assets/icons/Rocket@2x.svg"
 
 const Wrapper = styled.div`
@@ -8,12 +8,27 @@ const Wrapper = styled.div`
     height: 900px;
     overflow: auto;
     position: relative;
+
+    @media only screen and (max-width: ${breakpoint}) {
+        height: 270px;
+        white-space: nowrap;
+        overflow: hidden;
+        overflow-x: auto;
+    }
     
     .item {
         box-shadow: 1px 2px 5px ${grey};
         transition: 0.2s;
         margin-bottom: 30px;
         position: relative;
+
+        @media only screen and (max-width: ${breakpoint}) {
+            display: inline-block;
+            margin-right: 20px;
+            width: 440px;
+            vertical-align: top;
+        }
+        
 
         &:hover {
             box-shadow: 1px 5px 15px ${grey};
