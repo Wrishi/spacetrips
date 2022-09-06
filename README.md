@@ -50,7 +50,7 @@ REACT_APP_GRAPHQL_APIKEY=API_KEY
 - [ ] At least one pertinent automated test has been written
 - [x] [Apollo (graphql)](https://www.apollographql.com/) is used
 - [x] [react-map-gl](https://visgl.github.io/react-map-gl/) is used
-- [] A geosearch functionality based on the actual map region is made using [Algolia](https://www.algolia.com/doc/)
+- [x] A geosearch functionality based on the actual map region is made using [Algolia](https://www.algolia.com/doc/)
 - [x] [styled-components](https://styled-components.com/) is used
 - [ ] A README.md file describing project setup (commands to run, environment variables, etc.) and tradeoffs you have made
 

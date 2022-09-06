@@ -15,7 +15,7 @@ const Hits = (props) => {
       suggestions={hits}
       multiSection={false}
       onSuggestionsFetchRequested={({ value }) => props.refine(value)}
-      onSuggestionsClearRequested={() => setHits([])}
+      onSuggestionsClearRequested={() => { setHits([]) }}
       getSuggestionValue={hit => { 
         props.selectSpaceCenter(hit)
         return hit.name

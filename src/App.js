@@ -18,7 +18,6 @@ const App = () => {
   const [date, setDate] = useState(TODAY) // useState(moment().format(DATE_FORMAT)) // Does not have data for recent times
   const [time, setTime] = useState(moment().format(TIME_FORMAT))
 
-  const [spaceCenters, setSpaceCenters] = useState()
   const [selectedSpaceCenter, setSelectedSpaceCenter] = useState(null)
   const [hoveredSpaceCenter, setHoveredSpaceCenter] = useState(null)
 
@@ -35,8 +34,9 @@ const App = () => {
           filters="planet_code:EAR"
           insideBoundingBox={
             mapBoundaries
-              ? [[mapBoundaries._ne.lat, mapBoundaries._sw.lng,
-              mapBoundaries._sw.lat, mapBoundaries._ne.lng]]
+              // ? [[mapBoundaries._ne.lat, mapBoundaries._sw.lng,
+              // mapBoundaries._sw.lat, mapBoundaries._ne.lng]]
+              ? `${mapBoundaries._ne.lat},${ mapBoundaries._ne.lng},${ mapBoundaries._sw.lat},${mapBoundaries._sw.lng}`
               : undefined}
         />
         <div className="app">
@@ -55,7 +55,6 @@ const App = () => {
                 date={date} setDate={setDate}
                 time={time} setTime={setTime}
                 mapBoundaries={mapBoundaries}
-                setSpaceCenters={setSpaceCenters}
               />
               <Map
                 selectedSpaceCenter={selectedSpaceCenter}

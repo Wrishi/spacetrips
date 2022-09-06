@@ -5,13 +5,13 @@ import { DEFAULT_MAPBOX_CONFIG, MAPBOX_MIN_ZOOM } from '../../utilities/constant
 import pointerIcon from '../../assets/icons/Pointer@2x.svg'
 import pointerIconSelected from '../../assets/icons/Pointer_selected@2x.svg'
 import 'mapbox-gl/dist/mapbox-gl.css'
-import { connectHits } from 'react-instantsearch-dom'
+import { connectGeoSearch } from 'react-instantsearch-dom'
 
 // Problems:
 // 1) Pop up switch on marker change
 // 2) Shame html
 
-const Map = connectHits((props) => {
+const Map = connectGeoSearch((props) => {
   const mapRef = useRef(null)
   const [showPopUp, setShowPopUp] = useState(false)
 
