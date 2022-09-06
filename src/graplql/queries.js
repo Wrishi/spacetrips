@@ -42,6 +42,17 @@ export const GET_SPACESTATIONS = gql`
 }
 `
 
+export const GET_SPACESTATION = gql`
+  query getSpaceStation($uid: String!) {
+    spaceCenter(uid: $uid) {
+      id,
+      planet {
+        name
+      }
+    }
+  }
+`
+
 export const GET_FLIGHTS_FOR_SPACESTATIONS = gql`
   query getSpaceStations($from: ID!, $departureDay: GraphQLDate!) {
     flights(from: $from, departureDay: $departureDay, pageSize: 1000) {

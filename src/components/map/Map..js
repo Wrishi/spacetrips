@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Wrapper from './map.style'
 import ReactMapGL, { FullscreenControl, GeolocateControl, Marker, NavigationControl, Popup } from 'react-map-gl'
-import 'mapbox-gl/dist/mapbox-gl.css'
+import { DEFAULT_MAPBOX_CONFIG, MAPBOX_MIN_ZOOM } from '../../utilities/constants'
 import pointerIcon from '../../assets/icons/Pointer@2x.svg'
 import pointerIconSelected from '../../assets/icons/Pointer_selected@2x.svg'
-import { DEFAULT_MAPBOX_CONFIG, MAPBOX_MIN_ZOOM } from '../../utilities/constants'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 // Problems:
 // 1) Pop up switch on marker change
@@ -12,27 +12,21 @@ import { DEFAULT_MAPBOX_CONFIG, MAPBOX_MIN_ZOOM } from '../../utilities/constant
 
 const Map = (props) => {
   const mapRef = useRef(null)
-  const [spaceCentersInView, setSpaceCentersInView] = useState()
+  const [showPopUp, setShowPopUp] = useState(false)
 
-  /* Checks if location is in viewport 
-     Library must have had its own function
-  */
-  const isLocationInViewPort = (location) => {
-    const mapBounds = mapRef.current.getBounds()
-    return location.latitude > mapBounds._sw.lat
-      && location.latitude < mapBounds._ne.lat
-      && location.longitude > mapBounds._sw.lng
-      && location.longitude < mapBounds._ne.lng
-  }
+  useEffect(() => {
+    if (!props.spaceCenters) return
+    console.log(props.spaceCenters)
+  }, [props.spaceCenters])
 
   /* Fly to location if selected space center not in map */
   useEffect(() => {
     if (!props.selectedSpaceCenter) return
 
-    if (!isLocationInViewPort(props.selectedSpaceCenter))
-      mapRef.current.flyTo({
-        center: [props.selectedSpaceCenter.longitude, props.selectedSpaceCenter.latitude]
-      })
+    mapRef.current.flyTo({
+      center: [props.selectedSpaceCenter._geoloc.lng, props.selectedSpaceCenter._geoloc.lat]
+    })
+    setShowPopUp(true)
 
   }, [props.selectedSpaceCenter])
 
@@ -46,15 +40,12 @@ const Map = (props) => {
   const closePopUp = (e) => {
     // if(e.target.options.latitude === props.selectedSpaceCenter.latitude 
     //   && e.target.options.longitude === props.selectedSpaceCenter.longitude) 
+    setShowPopUp(false)
     props.selectSpaceCenter(null)
   }
 
   const mapViewChange = (e) => {
-    const _spaceCentersInView = props.spaceCenters.filter(
-      spaceCenter => isLocationInViewPort(spaceCenter)
-    )
-    setSpaceCentersInView(_spaceCentersInView)
-    props.setVisibleSpaceCenters(_spaceCentersInView)
+    props.setMapBoundaries(mapRef.current.getBounds())
   }
 
   return (
@@ -76,12 +67,15 @@ const Map = (props) => {
           minZoom={MAPBOX_MIN_ZOOM} /* Too many space centers!! */
         >
           {
-            spaceCentersInView && spaceCentersInView.length > 0 && spaceCentersInView.map((spaceCenter, index) => {
-              return <Marker latitude={spaceCenter.latitude} longitude={spaceCenter.longitude} anchor="bottom" key={index}>
+            props.spaceCenters && props.spaceCenters.length > 0 && props.spaceCenters.map((spaceCenter, index) => {
+              return <Marker anchor="bottom" key={index}
+                latitude={spaceCenter._geoloc.lat}
+                longitude={spaceCenter._geoloc.lng}
+              >
                 <button className='marker-btn' onClick={(e) => selectMarker(e, spaceCenter)}>
                   {
-                    (props.selectedSpaceCenter && props.selectedSpaceCenter.id === spaceCenter.id )
-                    || (props.hoveredSpaceCenter && props.hoveredSpaceCenter.id === spaceCenter.id)
+                    (props.selectedSpaceCenter && props.selectedSpaceCenter.uid === spaceCenter.uid)
+                      || (props.hoveredSpaceCenter && props.hoveredSpaceCenter.uid === spaceCenter.uid)
                       ? <img src={pointerIconSelected} alt="mark" />
                       : <img src={pointerIcon} alt="mark highlighted" />
                   }
@@ -91,9 +85,10 @@ const Map = (props) => {
           }
           {
             props.selectedSpaceCenter &&
+            showPopUp &&
             <Popup
-              latitude={props.selectedSpaceCenter.latitude}
-              longitude={props.selectedSpaceCenter.longitude}
+              latitude={props.selectedSpaceCenter._geoloc.lat}
+              longitude={props.selectedSpaceCenter._geoloc.lng}
               onClose={closePopUp}
               anchor='bottom'
               closeButton={false}

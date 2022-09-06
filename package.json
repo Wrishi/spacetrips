@@ -15,6 +15,7 @@
     "react-autosuggest": "^10.1.0",
     "react-dom": "^18.2.0",
     "react-instantsearch-dom": "^6.32.1",
+    "react-instantsearch-hooks-web": "^6.32.1",
     "react-map-gl": "^7.0.19",
     "react-moment": "^1.1.2",
     "react-scripts": "5.0.1",

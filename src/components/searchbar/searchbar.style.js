@@ -48,6 +48,8 @@ const Wrapper = styled.div`
             background-color: ${white};
             color: ${darkgrey};
             z-index: 1;
+            max-height: 160px;
+            overflow: auto;
 
             ul{
                 list-style: none;

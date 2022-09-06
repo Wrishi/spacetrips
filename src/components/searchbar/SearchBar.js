@@ -1,44 +1,30 @@
 import React from 'react';
-import { Configure, InstantSearch } from 'react-instantsearch-dom';
-import algoliasearch from 'algoliasearch/lite';
 import Wrapper from './searchbar.style';
-import AutoComplete from './Autocomplete';
 import { TIME_FORMAT, TODAY } from '../../utilities/constants';
 import moment from 'moment';
+import GeoSearch from './GeoSearch';
 
-const searchClient = algoliasearch(
-    process.env.REACT_APP_ALGOLIA_APPID,
-    process.env.REACT_APP_ALGOLIA_APIKEY
-);
 
 const SearchBar = (props) => {
 
     /* Selects date */
     const selectDate = (e) => {
-        props.setDate(e.target.value ? e.target.value: TODAY)
+        props.setDate(e.target.value ? e.target.value : TODAY)
     }
 
     /* Selects time */
     const selectTime = (e) => {
-        props.setTime(e.target.value ? e.target.value: moment().format(TIME_FORMAT))
+        props.setTime(e.target.value ? e.target.value : moment().format(TIME_FORMAT))
     }
 
     return <Wrapper>
         <div className="search-bar">
             <div><label>Departure</label></div>
             <div>
-                <InstantSearch
-                    indexName={process.env.REACT_APP_SEARCH_INDEX}
-                    searchClient={searchClient}
-                    onSearchStateChange={(searchState) => console.log(searchState)}
-                >
-                    <AutoComplete selectSpaceCenter={props.selectSpaceCenter}/>
-                    <Configure hitsPerPage={4}
-                        filters="planet_code:EAR"
-                        // facets={`'*,planet_code'`}
-                        // facetFilters={`[['planet_code:EAR']]`}
-                    />
-                </InstantSearch>
+                <GeoSearch
+                    setSpaceCenters={props.setSpaceCenters}
+                    selectSpaceCenter={props.selectSpaceCenter}
+                    mapBoundaries={props.mapBoundaries} />
             </div>
             <div><label>Departure time</label></div>
             <div>
