@@ -5,6 +5,13 @@ import SearchBar from './components/searchbar/SearchBar';
 import { TIME_FORMAT, TODAY } from './utilities/constants';
 import { useState } from 'react';
 import moment from 'moment'
+import { Configure, InstantSearch } from 'react-instantsearch-dom';
+import algoliasearch from 'algoliasearch/lite';
+
+const searchClient = algoliasearch(
+  process.env.REACT_APP_ALGOLIA_APPID,
+  process.env.REACT_APP_ALGOLIA_APIKEY
+);
 
 const App = () => {
   /* Active planet */
@@ -17,45 +24,50 @@ const App = () => {
 
   const [mapBoundaries, setMapBoundaries] = useState()
 
-  const selectSpaceCenterByUID = (uid) => {
-    setSelectedSpaceCenter(spaceCenters.find(spaceCenter => spaceCenter.uid === uid))
-  }
-
   return (
     <Wrapper>
-      <div className="app">
-        <div className='row'>
-          <div className='col-4'>
-            <div className='logo'>SPACE TRIPS</div>
-          </div>
-          <div className='col-8'>
-            <SearchBar selectSpaceCenter={selectSpaceCenterByUID}
-              date={date} setDate={setDate}
-              time={time} setTime={setTime}
-              mapBoundaries={mapBoundaries}
-              setSpaceCenters={setSpaceCenters}
-            />
+      <InstantSearch
+        indexName={process.env.REACT_APP_SEARCH_INDEX}
+        searchClient={searchClient}
+        onSearchStateChange={(searchState) => console.log(searchState)}
+      >
+        <Configure hitsPerPage={400}
+          filters="planet_code:EAR"
+          insideBoundingBox={
+            mapBoundaries
+              ? [[mapBoundaries._ne.lat, mapBoundaries._sw.lng,
+              mapBoundaries._sw.lat, mapBoundaries._ne.lng]]
+              : undefined}
+        />
+        <div className="app">
+          <div className='row'>
+            <div className='col-4'>
+              <div className='logo'>SPACE TRIPS</div>
+              <List
+                selectedSpaceCenter={selectedSpaceCenter}
+                selectSpaceCenter={setSelectedSpaceCenter}
+                hoverSpaceCenter={setHoveredSpaceCenter}
+                date={date}
+                time={time} />
+            </div>
+            <div className='col-8'>
+              <SearchBar selectSpaceCenter={setSelectedSpaceCenter}
+                date={date} setDate={setDate}
+                time={time} setTime={setTime}
+                mapBoundaries={mapBoundaries}
+                setSpaceCenters={setSpaceCenters}
+              />
+              <Map
+                selectedSpaceCenter={selectedSpaceCenter}
+                selectSpaceCenter={setSelectedSpaceCenter}
+                hoveredSpaceCenter={hoveredSpaceCenter}
+                setMapBoundaries={setMapBoundaries}
+              />
+            </div>
           </div>
         </div>
-        <div className='row'>
-          <div className='col-4'>
-            <List spaceCenters={spaceCenters}
-              selectedSpaceCenter={selectedSpaceCenter}
-              selectSpaceCenter={setSelectedSpaceCenter}
-              hoverSpaceCenter={setHoveredSpaceCenter}
-              date={date}
-              time={time} />
-          </div>
-          <div className='col-8'>
-            <Map spaceCenters={spaceCenters}
-              selectedSpaceCenter={selectedSpaceCenter}
-              selectSpaceCenter={setSelectedSpaceCenter}
-              hoveredSpaceCenter={hoveredSpaceCenter}
-              setMapBoundaries={setMapBoundaries}
-            />
-          </div>
-        </div>
-      </div>
+
+      </InstantSearch>
     </Wrapper>
   );
 }

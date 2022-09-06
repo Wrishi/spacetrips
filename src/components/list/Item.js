@@ -34,10 +34,10 @@ const Item = (props) => {
         >
             <header>
                 <div className='title'>
-                    {loading && <div>Loading flights...</div>}
-                    {error && <div>Unknown error occured...</div>}
                     <h4 className="center">{props.spaceCenter.name}</h4>
                     <span className="location">{planetName || props.spaceCenter.planet_code}</span>
+                    {loading && <div>Loading...</div>}
+                    {error && <div>Unknown error occured...</div>}
                 </div>
                 <span className="icon"></span>
             </header>

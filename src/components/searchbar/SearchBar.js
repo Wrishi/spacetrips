@@ -2,8 +2,7 @@ import React from 'react';
 import Wrapper from './searchbar.style';
 import { TIME_FORMAT, TODAY } from '../../utilities/constants';
 import moment from 'moment';
-import GeoSearch from './GeoSearch';
-
+import AutoComplete from './Autocomplete';
 
 const SearchBar = (props) => {
 
@@ -21,10 +20,7 @@ const SearchBar = (props) => {
         <div className="search-bar">
             <div><label>Departure</label></div>
             <div>
-                <GeoSearch
-                    setSpaceCenters={props.setSpaceCenters}
-                    selectSpaceCenter={props.selectSpaceCenter}
-                    mapBoundaries={props.mapBoundaries} />
+                <AutoComplete selectSpaceCenter={props.selectSpaceCenter} />
             </div>
             <div><label>Departure time</label></div>
             <div>
