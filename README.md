@@ -1,6 +1,9 @@
-# Space trips
+# <img src="src/assets/icons/Rocket@2x.svg"/> Space trips
 
-
+&nbsp;
+<img src="src/assets/images/screenshot.png"/> 
+&nbsp;
+&nbsp;
 
 ## Installation instructions
 This project was developed with Node18.6.0
