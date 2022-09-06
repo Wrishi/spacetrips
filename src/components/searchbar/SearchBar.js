@@ -4,28 +4,36 @@ import { TIME_FORMAT, TODAY } from '../../utilities/constants';
 import moment from 'moment';
 import AutoComplete from './Autocomplete';
 
-const SearchBar = (props) => {
+const SearchBar = ({
+    /* variables */
+    date,
+    time,
+    /* functions */
+    setDate,
+    setTime,
+    selectSpaceCenter
+}) => {
 
     /* Selects date */
     const selectDate = (e) => {
-        props.setDate(e.target.value ? e.target.value : TODAY)
+        setDate(e.target.value ? e.target.value : TODAY)
     }
 
     /* Selects time */
     const selectTime = (e) => {
-        props.setTime(e.target.value ? e.target.value : moment().format(TIME_FORMAT))
+        setTime(e.target.value ? e.target.value : moment().format(TIME_FORMAT))
     }
 
     return <Wrapper>
-        <div className="search-bar">
+        <div className="search-bar" id="search-bar">
             <div><label>Departure</label></div>
             <div>
-                <AutoComplete selectSpaceCenter={props.selectSpaceCenter} />
+                <AutoComplete selectSpaceCenter={selectSpaceCenter} />
             </div>
             <div><label>Departure time</label></div>
             <div>
-                <input type="date" value={props.date} onChange={selectDate}></input>
-                <input type="time" value={props.time} onChange={selectTime}></input>
+                <input type="date" value={date} onChange={selectDate}></input>
+                <input type="time" value={time} onChange={selectTime}></input>
             </div>
             <div>
                 <button></button>

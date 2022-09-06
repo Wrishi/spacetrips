@@ -2,7 +2,8 @@ import Wrapper from './app.style';
 import Map from './components/map/Map.';
 import List from './components/list/List';
 import SearchBar from './components/searchbar/SearchBar';
-import { TIME_FORMAT, TODAY } from './utilities/constants';
+// import SearchBar from './components/searchbar/AlternateSearchBar';
+import { MAX_HITS, TIME_FORMAT, TODAY } from './utilities/constants';
 import { useState } from 'react';
 import moment from 'moment'
 import { Configure, InstantSearch } from 'react-instantsearch-dom';
@@ -30,7 +31,7 @@ const App = () => {
         searchClient={searchClient}
         onSearchStateChange={(searchState) => console.log(searchState)}
       >
-        <Configure hitsPerPage={400}
+        <Configure hitsPerPage={mapBoundaries ? MAX_HITS: 0}
           filters="planet_code:EAR"
           insideBoundingBox={
             mapBoundaries
@@ -45,22 +46,22 @@ const App = () => {
               <div className='logo'>SPACE TRIPS</div>
               <List
                 selectedSpaceCenter={selectedSpaceCenter}
-                selectSpaceCenter={setSelectedSpaceCenter}
-                hoverSpaceCenter={setHoveredSpaceCenter}
                 date={date}
-                time={time} />
+                time={time}
+                hoverSpaceCenter={setHoveredSpaceCenter} />
             </div>
             <div className='col-8'>
-              <SearchBar selectSpaceCenter={setSelectedSpaceCenter}
+              <SearchBar 
                 date={date} setDate={setDate}
                 time={time} setTime={setTime}
                 mapBoundaries={mapBoundaries}
+                selectSpaceCenter={setSelectedSpaceCenter}
               />
               <Map
                 selectedSpaceCenter={selectedSpaceCenter}
-                selectSpaceCenter={setSelectedSpaceCenter}
                 hoveredSpaceCenter={hoveredSpaceCenter}
                 setMapBoundaries={setMapBoundaries}
+                selectSpaceCenter={setSelectedSpaceCenter}
               />
             </div>
           </div>

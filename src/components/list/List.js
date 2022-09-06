@@ -3,21 +3,29 @@ import { connectHits } from 'react-instantsearch-dom';
 import Item from './Item';
 import Wrapper from './list.style';
 
-const List = connectHits((props) => {
+const List = connectHits(({
+  /* variables */
+  hits,
+  selectedSpaceCenter,
+  date,
+  time,
+  /* functions */
+  hoverSpaceCenter
+}) => {
 
   return (
     <Wrapper>
-      <div className="list" id="list-1">
+      <div className="list" id="list">
         {
-          props.hits && props.hits.length > 0
-            ? props.hits.map((spaceCenter, index) => {
+          hits && hits.length > 0
+            ? hits.map((spaceCenter) => {
               return <Item spaceCenter={spaceCenter}
-                selectedSpaceCenter={props.selectedSpaceCenter}
-                date={props.date}
-                time={props.time}
-                key={index}
-                hoverSpaceCenter={props.hoverSpaceCenter}
-                />
+                selectedSpaceCenter={selectedSpaceCenter}
+                date={date}
+                time={time}
+                key={spaceCenter.uid}
+                hoverSpaceCenter={hoverSpaceCenter}
+              />
             })
             : <div>No space centers were found in viewport...</div>
         }

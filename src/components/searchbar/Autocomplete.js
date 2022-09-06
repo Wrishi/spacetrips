@@ -2,22 +2,28 @@ import { useEffect, useState } from "react";
 import Autosuggest from "react-autosuggest";
 import { connectAutoComplete, Highlight } from "react-instantsearch-dom";
 
-const Hits = (props) => {
+const Hits = ({ 
+  /* variables */
+  hits, 
+  refine, 
+  /* functions */
+  selectSpaceCenter 
+}) => {
   const [value, setValue] = useState('')
-  const [hits, setHits] = useState([])
+  const [spaceCenters, setSpaceCenters] = useState([])
 
   useEffect(() => {
-    if (props.hits) setHits(!value ? [] : props.hits)
-  }, [props.hits, value])
+    if (hits) setSpaceCenters(!value ? [] : hits)
+  }, [hits, value])
 
   return (
     <Autosuggest
-      suggestions={hits}
+      suggestions={spaceCenters}
       multiSection={false}
-      onSuggestionsFetchRequested={({ value }) => props.refine(value)}
-      onSuggestionsClearRequested={() => { setHits([]) }}
+      onSuggestionsFetchRequested={({ value }) => refine(value)}
+      onSuggestionsClearRequested={() => { setSpaceCenters([]) }}
       getSuggestionValue={hit => { 
-        props.selectSpaceCenter(hit)
+        selectSpaceCenter(hit)
         return hit.name
       }}
       renderSuggestion={hit => (
@@ -28,7 +34,10 @@ const Hits = (props) => {
       inputProps={{
         placeholder: 'Search space centers...',
         value: value,
-        onChange: (event, { newValue, method }) => { setValue(newValue) },
+        onChange: (event, { newValue, method }) => { 
+          setValue(newValue) 
+          refine(newValue)
+        },
       }}
       renderSectionTitle={section => section.index}
       getSectionSuggestions={section => section.hits}

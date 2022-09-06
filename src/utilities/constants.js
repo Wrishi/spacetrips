@@ -23,3 +23,5 @@ export const TODAY = "2019-09-23" // new Date().toISOString().slice(0, 10)
 export const TIME_FORMAT = "HH:mm"
 export const DATE_FORMAT = "YYYY-MM-DD"
 export const FLIGHT_TIME_DIFF_RANGE = 300 /* In minutes */
+
+export const MAX_HITS = 2000
