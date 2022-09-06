@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { breakpoint, lightgrey, translucent, white } from './utilities/style.def';
+import { breakpoint, lightgrey, topBarHeight, translucent, white } from './utilities/style.def';
 import markerCardBackground from './assets/images/space_center_bg.png'
 
 const Wrapper = styled.div`
@@ -11,6 +11,7 @@ const Wrapper = styled.div`
         font-weight: bold;
         letter-spacing: 7px;
         box-shadow: 1px 3px 10px ${lightgrey};
+        height: ${topBarHeight}px;
     }
     .row {
         position: relative;
@@ -38,7 +39,7 @@ const Wrapper = styled.div`
     .col-11 {width: 91.66%;}
     .col-12 {width: 100%;}
 
-    @media only screen and (max-width: ${breakpoint}) {
+    @media only screen and (max-width: ${breakpoint}px) {
         [class*="col-"] {
             float: none;
             width: 100%;

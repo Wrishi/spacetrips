@@ -1,5 +1,7 @@
 # <img src="src/assets/icons/Rocket@2x.svg"/> Space trips
 
+A responsive web application for viewing space flights from earth.
+&nbsp;
 &nbsp;
 <img src="src/assets/images/screenshot.png"/> 
 &nbsp;
@@ -33,6 +35,13 @@ REACT_APP_GRAPHQL_APIKEY=API_KEY
 ```
 * Access the search page at http://localhost:3005
 
+## Testing instructions
+All tests were written with React Testing Library
+* To view test results
+```sh
+npm test
+```
+
 
 ## Checklist
 ### Map Component
@@ -57,7 +66,7 @@ REACT_APP_GRAPHQL_APIKEY=API_KEY
 - [x] [react-map-gl](https://visgl.github.io/react-map-gl/) is used
 - [x] A geosearch functionality based on the actual map region is made using [Algolia](https://www.algolia.com/doc/)
 - [x] [styled-components](https://styled-components.com/) is used
-- [ ] A README.md file describing project setup (commands to run, environment variables, etc.) and tradeoffs you have made
+- [x] A README.md file describing project setup (commands to run, environment variables, etc.) and tradeoffs you have made
 
 ### Extra
 - [ ] Show list of flights

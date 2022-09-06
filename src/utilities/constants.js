@@ -1,3 +1,5 @@
+import { topBarHeight } from "./style.def"
+
 export const DEFAULT_MAPBOX_CONFIG = {
     viewState: {
         latitude: 41.579606918652054,
@@ -6,7 +8,7 @@ export const DEFAULT_MAPBOX_CONFIG = {
     },
     style: { 
         width: '100%', 
-        height: 900 
+        height: window.innerHeight - topBarHeight // 900 
     }
 }
 export const MAPBOX_MIN_ZOOM = 3

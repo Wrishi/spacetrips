@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import { breakpoint, darkgrey, grey, lightgrey, white } from '../../utilities/style.def';
+import { breakpoint, darkgrey, grey, lightgrey, topBarHeight, white } from '../../utilities/style.def';
 import rocketIcon from "../../assets/icons/Rocket@2x.svg"
 
 const Wrapper = styled.div`
 .list {
     padding: 20px;
-    height: 900px;
+    height: calc(100vh - ${topBarHeight}px);
     overflow: auto;
     position: relative;
 
-    @media only screen and (max-width: ${breakpoint}) {
+    @media only screen and (max-width: ${breakpoint}px) {
         height: 270px;
         white-space: nowrap;
         overflow: hidden;
@@ -22,9 +22,10 @@ const Wrapper = styled.div`
         margin-bottom: 30px;
         position: relative;
 
-        @media only screen and (max-width: ${breakpoint}) {
+        @media only screen and (max-width: ${breakpoint}px) {
             display: inline-block;
             margin-right: 20px;
+            margin-bottom: 0;
             width: 440px;
             vertical-align: top;
         }
