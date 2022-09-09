@@ -33,6 +33,10 @@ REACT_APP_ALGOLIA_APIKEY=<Provided by assignment: tips/Algolia.md>
 REACT_APP_GRAPHQL_ENDPOINT=http://localhost:3000/graphql
 REACT_APP_GRAPHQL_APIKEY=API_KEY
 ```
+* To run application
+```sh
+npm start
+```
 * Access the search page at http://localhost:3005
 
 ## Testing instructions
