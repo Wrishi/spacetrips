@@ -98,7 +98,8 @@ const Map = connectGeoSearch(({
               longitude={selectedSpaceCenter._geoloc.lng}
               onClose={closePopUp}
               anchor='bottom'
-              closeButton={false}
+              closeButton={true}
+              closeOnClick={false}
             >
               <div className='marker-card'>
                 <div className='details'>
