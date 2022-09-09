@@ -41,7 +41,7 @@ const Map = connectGeoSearch(({
   }
 
   /* Closes pop up */
-  const closePopUp = (e) => {
+  const closePopUp = () => {
     // if(e.target.options.latitude === selectedSpaceCenter.latitude 
     //   && e.target.options.longitude === selectedSpaceCenter.longitude) 
     setShowPopUp(false)
@@ -49,7 +49,7 @@ const Map = connectGeoSearch(({
   }
 
   /* Updates Map boundaries on view change */
-  const mapViewChange = (e) => {
+  const mapViewChange = () => {
     setMapBoundaries(mapRef.current.getBounds())
   }
 
@@ -77,7 +77,9 @@ const Map = connectGeoSearch(({
                 latitude={spaceCenter._geoloc.lat}
                 longitude={spaceCenter._geoloc.lng}
               >
-                <button className='marker-btn' onClick={(e) => selectMarker(e, spaceCenter)}>
+                <button className='marker-btn'
+                  data-testid="marker"
+                  onClick={(e) => selectMarker(e, spaceCenter)}>
                   {
                     (selectedSpaceCenter && selectedSpaceCenter.uid === spaceCenter.uid)
                       || (hoveredSpaceCenter && hoveredSpaceCenter.uid === spaceCenter.uid)

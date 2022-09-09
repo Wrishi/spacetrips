@@ -36,11 +36,14 @@ REACT_APP_GRAPHQL_APIKEY=API_KEY
 * Access the search page at http://localhost:3005
 
 ## Testing instructions
-All tests were written with React Testing Library
+All tests were written with Cypress. They were tested for 3 browsers: Chromium, Firefox and Electron
 * To view test results
 ```sh
 npm test
 ```
+* From the first screen select *Component Testing*
+* Choose browser and click on *Start Component Testing in <Chosen Browser>*
+* Under *Component specs* click *App.cy.js*
 
 
 ## Checklist
@@ -61,7 +64,7 @@ npm test
 - [x] When the user hovers a card, it changes the color of the according Space center marker on the map
 
 ### Expectations
-- [ ] At least one pertinent automated test has been written
+- [x] At least one pertinent automated test has been written
 - [x] [Apollo (graphql)](https://www.apollographql.com/) is used
 - [x] [react-map-gl](https://visgl.github.io/react-map-gl/) is used
 - [x] A geosearch functionality based on the actual map region is made using [Algolia](https://www.algolia.com/doc/)

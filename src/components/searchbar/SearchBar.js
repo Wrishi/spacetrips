@@ -25,7 +25,7 @@ const SearchBar = ({
     }
 
     return <Wrapper>
-        <div className="search-bar" id="search-bar">
+        <div className="search-bar" data-testid="search-bar">
             <div><label>Departure</label></div>
             <div>
                 <AutoComplete selectSpaceCenter={selectSpaceCenter} />

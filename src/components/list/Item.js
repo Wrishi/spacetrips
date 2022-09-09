@@ -40,6 +40,7 @@ const Item = ({
             ref={itemRef}
             onMouseOver={() => hoverSpaceCenter(spaceCenter)}
             onMouseOut={() => hoverSpaceCenter(null)}
+            data-testid="item"
         >
             <header>
                 <div className='title'>

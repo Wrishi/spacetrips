@@ -3,16 +3,10 @@ import Map from './components/map/Map.';
 import List from './components/list/List';
 import SearchBar from './components/searchbar/SearchBar';
 // import SearchBar from './components/searchbar/AlternateSearchBar';
-import { MAX_HITS, TIME_FORMAT, TODAY } from './utilities/constants';
+import { MAX_HITS, SEARCH_CLIENT, SEARCH_CONFIG_FILTER, TIME_FORMAT, TODAY } from './utilities/constants';
 import { useState } from 'react';
 import moment from 'moment'
 import { Configure, InstantSearch } from 'react-instantsearch-dom';
-import algoliasearch from 'algoliasearch/lite';
-
-const searchClient = algoliasearch(
-  process.env.REACT_APP_ALGOLIA_APPID,
-  process.env.REACT_APP_ALGOLIA_APIKEY
-);
 
 const App = () => {
   /* Active planet */
@@ -28,11 +22,11 @@ const App = () => {
     <Wrapper>
       <InstantSearch
         indexName={process.env.REACT_APP_SEARCH_INDEX}
-        searchClient={searchClient}
+        searchClient={SEARCH_CLIENT}
         onSearchStateChange={(searchState) => console.log(searchState)}
       >
         <Configure hitsPerPage={mapBoundaries ? MAX_HITS: 0}
-          filters="planet_code:EAR"
+          filters={SEARCH_CONFIG_FILTER}
           insideBoundingBox={
             mapBoundaries
               // ? [[mapBoundaries._ne.lat, mapBoundaries._sw.lng,
@@ -54,7 +48,6 @@ const App = () => {
               <SearchBar 
                 date={date} setDate={setDate}
                 time={time} setTime={setTime}
-                mapBoundaries={mapBoundaries}
                 selectSpaceCenter={setSelectedSpaceCenter}
               />
               <Map
