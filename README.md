@@ -48,7 +48,7 @@ npm test
 ## Trade offs
 * Limiting the number of hits makes the application perform better but does not show all markers within boundary
 * Increasing it cause decline in responsiveness
-
+* The number of hits can be modified in `src/utililies/constants.js` in variable `MAX_HITS` (currently set to 20)
 
 ## Checklist
 ### Map Component
