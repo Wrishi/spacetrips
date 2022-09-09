@@ -42,8 +42,12 @@ All tests were written with Cypress. They were tested for 3 browsers: Chromium, 
 npm test
 ```
 * From the first screen select *Component Testing*
-* Choose browser and click on *Start Component Testing in <Chosen Browser>*
+* Choose browser and click on *Start Component Testing in [Chosen Browser]*
 * Under *Component specs* click *App.cy.js*
+
+## Trade offs
+* Limiting the number of hits makes the application perform better but does not show all markers within boundary
+* Increasing it cause decline in responsiveness
 
 
 ## Checklist
